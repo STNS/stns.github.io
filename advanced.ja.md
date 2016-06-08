@@ -67,7 +67,9 @@ STNSでは2種類の方法でsudoのパスワードを管理することが出�
 STNSにsudo用のアカウントを設け、パスワードを管理することが出来ます。イメージとしては第2のrootパスワードです。
 
 下記のようにサーバにsudo用の定義を行います。下記の例ではSaltを有効にし、10万回のストレッチングを行っています。
+
 * /etc/stns/stns.conf
+
 ```toml
 salt_enable = true
 stretching_number = 100000
@@ -87,6 +89,7 @@ a3b20fc634ac4bad5be8a40566acb00adcd2e5bf2fb9be4750150553d529b799
 次にクライアントのpamの設定を行います。
 
 * /etc/pam.d/sudo
+
 ```
 #%PAM-1.0
 auth       sufficient   libpam_stns.so sudo example

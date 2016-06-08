@@ -10,6 +10,7 @@ rhel,debian系共にリポジトリを提供しています。
 ```
 $ curl -fsSL https://repo.stns.jp/scripts/yum-repo.sh | sh
 ```
+
 ### debian/ubuntu
 ```
 $ curl -fsSL https://repo.stns.jp/scripts/apt-repo.sh | sh
@@ -19,11 +20,13 @@ $ curl -fsSL https://repo.stns.jp/scripts/apt-repo.sh | sh
 クライアントは`libnss-stns`と`libpam-stns`に分離しています。また本手順はrhel系のコマンドを利用しますが、debian系でも同等の作業可能です。
 
 STNSに加えて名前解決のキャッシュを行うためにnscdをインストールします。
+
 ```
 $ yum install stns libnss-stns libpam-stns nscd
 ```
 
 ## 設定ファイル
+
 ### サーバ
 インストールが完了したらサーバの設定から行います。
 
@@ -117,7 +120,7 @@ nsswitch.confにstnsを追加し、stns経由での名前解決を有効にし�
 この時点で下記のように名前解決が出来ない場合はnscdがネガティブキャッシュしている可能性があるのでキャッシュを削除してください。
 
 ```
-$  id example                                                                                                                                                                
+$  id example
 uid=1001(example) gid=1001(example) groups=1001(example)
 ```
 

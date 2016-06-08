@@ -44,7 +44,7 @@ When the `deploy` user attempts to login to a server via SSH, STNS server return
 
 It's a common requirement to control who can access to a server with respect to organizational structure. Imagine such a case like that we want to give read and write privilege to ones in a division, and, at the same time, we want to add read-only privilege to ones in a department to which the division belong.
 
-STNS meets such a complicated requiment.
+STNS meets such a complicated requirement.
 
 ```toml
 [groups.department]
@@ -71,7 +71,7 @@ uid=1001(user1) gid=1002(division) groups=1001(department),1002(division)
 
 ### Manage passwords for `sudo`
 
-STNS privides two ways to manage password for `sudo`:
+STNS provides two ways to manage password for `sudo`:
 
 1. Use a common password for a special user account for `sudo`
 2. Authenticate users by their passwords as usual

@@ -23,9 +23,9 @@ $ curl -fsSL https://repo.stns.jp/scripts/apt-repo.sh | sh
 
 ### Install STNS Server and Client
 
-Alhough we use commands for RHEL in what follows, the equivalent commands will work also for Debian family.
+Although we use commands for RHEL in what follows, the equivalent commands will work also for Debian family.
 
-You can install STNS server by installing the stns package. The STNS client consists of two programs: `libnss-stns` and `libpam-stns`. Additionally, you have to install nscd to cache result of name resolution.
+You can install STNS server by installing the `stns` package. The STNS client consists of two packages: `libnss-stns` and `libpam-stns`. Additionally, you have to install nscd to cache result of name resolution.
 
 ```
 $ yum install stns libnss-stns libpam-stns nscd
@@ -118,7 +118,7 @@ chain_ssh_wrapper = "/usr/libexec/openssh/ssh-ldap-wrapper"
 ssl_verify        = true
 ```
 
-This file conigures the location of SNTS server, and the combination of id and password for basic authentication.
+This file configures the location of SNTS server, and the combination of id and password for basic authentication.
 
 You can set a script path by `chain_ssh_wrapper` to retrieve SSH public key from other place except for STNS server. STNS client executes the script with a user name as an argument.
 
@@ -164,7 +164,7 @@ This configuration means that tha SSH server:
 * Activates SSH Public key authentication.
 * Use `/usr/local/bin/stns-key-wrapper` to retrieve the public key for the login user.
 
-Reload sshd right after the modifiying the coniguration file.
+Reload sshd right after the modifying the configuration file.
 
 ```
 service sshd restart

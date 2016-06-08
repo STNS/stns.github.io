@@ -1,0 +1,13 @@
+# Site settings
+title: STNS
+tag_text: Simple TOML Name Service
+description: STNS (Simple TOML Name Service) allows you to easily manage Linux users with simple TOML-based configuration.
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+include: ["en", "ja"]
+exclude: ["README.md"]
+sass:
+  style: compressed

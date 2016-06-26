@@ -103,10 +103,14 @@ wrapper_path = "/usr/local/bin/stns-query-wrapper"
 chain_ssh_wrapper = "/usr/libexec/openssh/ssh-ldap-wrapper"
 
 ssl_verify = true
+
+request_timeout = 3
+
+http_proxy = "http://your.proxy.com"
 ```
 
 設定としてはサーバのエンドポイント、ベーシック認証のID、パスワードを定義しています。`chain_ssh_wrapper`についてはSSHログイン時の公開鍵を取得する際にSTNSに加えて取得先がある場合に取得コマンドを定義します。定義されたコマンドに`ユーザー名`を引数に渡して取得を試みます。
-また`ssl_verify`についてはSTNSサーバをnginxなどと組み合わせてSSL対応した際に証明証の照合エラーを無視するか否かの設定です。`false`に設定した場合に証明証のエラーを無視します。
+`ssl_verify`についてはSTNSサーバをnginxなどと組み合わせてSSL対応した際に証明証の照合エラーを無視するか否かの設定です。`false`に設定した場合に証明証のエラーを無視します。プロキシサーバが必要な環境においては`http_proxy`もしくは環境変数`HTTP_PROXY`にプロキシサーバのURLを指定してください。
 
 * /etc/nssswitch.conf
 

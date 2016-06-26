@@ -116,6 +116,10 @@ wrapper_path      = "/usr/local/bin/stns-query-wrapper"
 chain_ssh_wrapper = "/usr/libexec/openssh/ssh-ldap-wrapper"
 
 ssl_verify        = true
+
+request_timeout = 3
+
+http_proxy = "http://your.proxy.com"
 ```
 
 This file configures the location of SNTS server, and the combination of id and password for basic authentication.
@@ -123,6 +127,8 @@ This file configures the location of SNTS server, and the combination of id and 
 You can set a script path by `chain_ssh_wrapper` to retrieve SSH public key from other place except for STNS server. STNS client executes the script with a user name as an argument.
 
 `ssl_verify` tells if the client must verify or not the TLS certificate in the negotiation process with STNS server. If `false` is set, the client ignores the verification error of TLS certificate.
+
+You can set a URL of HTTP proxy server by `http_proxy` or by the environment valiable `HTTP_PROXY`.
 
 **Thirdly**, configure the name resolution order like below.
 

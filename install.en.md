@@ -128,7 +128,7 @@ You can set a script path by `chain_ssh_wrapper` to retrieve SSH public key from
 
 `ssl_verify` tells if the client must verify or not the TLS certificate in the negotiation process with STNS server. If `false` is set, the client ignores the verification error of TLS certificate.
 
-You can set a url by `http_proxy` or environment valiable `HTTP_PROXY` to Proxy used for the HTTP request.
+You can set a URL of HTTP proxy server by `http_proxy` or by the environment valiable `HTTP_PROXY`.
 
 **Thirdly**, configure the name resolution order like below.
 

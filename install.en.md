@@ -106,7 +106,7 @@ $ service nscd reload
 `/etc/stns/libnss_stns.conf`:
 
 ```toml
-api_end_point     = ["http://<server-ip>:1104"]
+api_end_point     = ["http://<server-ip>:1104/v2"]
 
 user              = "test_user"
 password          = "test_password"

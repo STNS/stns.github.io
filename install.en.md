@@ -132,7 +132,7 @@ You can set a URL of HTTP proxy server by `http_proxy` or by the environment val
 
 **Thirdly**, configure the name resolution order like below.
 
-`/etc/nssswitch.conf`:
+`/etc/nsswitch.conf`:
 
 ```
 passwd:     files stns

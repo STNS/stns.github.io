@@ -85,19 +85,9 @@ You can create a special user account for `sudo` like below. It can be considere
 `/etc/stns/stns.conf`:
 
 ```toml
-salt_enable       = true
-stretching_number = 100000
-
 [sudoers.example]
-password          = "a3b20fc634ac4bad5be8a40566acb00adcd2e5bf2fb9be4750150553d529b799"
-hash_type         = "sha256"
+password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
 ```
-
-The configuration above:
-
-* Enables salt and does 100 thousands of stretching to secure the password
-* Utilizes SHA256 algorithm to hash the password (`hash_type` can be set to `sha256` or `sha512`)
-
 You can use [stns-passwd](https://github.com/STNS/stns-passwd) to get such a hashed password.
 
 ##### Client
@@ -133,8 +123,7 @@ You can also set hashed passwords for each users like below:
 id        = 1000
 group_id  = 1000
 directory = "/home/example"
-password  = "f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2"
-hash_type = "sha256"
+password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
 ```
 
 ##### Client

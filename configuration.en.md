@@ -18,9 +18,6 @@ uid=1001(pyama) gid=1001(pyama) groups=1001(pyama)
 ```toml
 port = 1104
 include = "/etc/stns/conf.d/*"
-salt_enable = false
-stretching_number = 0
-hash_type = "sha256"
 
 # support basic auth
 user = "basic_user"
@@ -39,8 +36,7 @@ id = 1001
 users = ["example"]
 
 [sudoers.example]
-password = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
-hash_type = "sha256"
+password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
 ```
 
 ### General
@@ -51,9 +47,6 @@ hash_type = "sha256"
 |include|include config directory|
 |user| basic authentication user|
 |password| basic authentication password|
-|salt_enable| To generate a salt of the password from the user name |
-|stretching_number|Stretching number of password|
-|hash_type| password hash algorithm (sha256,sha512) |
 
 ### Users
 
@@ -67,7 +60,6 @@ hash_type = "sha256"
 |keys|public key list|
 |link_users|merge public key from the specified user|
 |password| password token|
-|hash_type| hash algorithm (sha256,sha512) Users > General|
 
 #### link_users
 
@@ -128,7 +120,5 @@ $ /user/local/bin/stns-query-wrapper /group/name/division
 |Name|Description|
 |---|---|
 |password(※)| password token|
-|hash_type| hash algorithm default sha256(sha256,sha512) |
 
 ※: required parameter
-

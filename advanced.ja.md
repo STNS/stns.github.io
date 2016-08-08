@@ -66,24 +66,20 @@ STNSでは2種類の方法でsudoのパスワードを管理することが出�
 #### sudo専用のアカウントを利用する
 STNSにsudo用のアカウントを設け、パスワードを管理することが出来ます。イメージとしては第2のrootパスワードです。
 
-下記のようにサーバにsudo用の定義を行います。下記の例ではSaltを有効にし、10万回のストレッチングを行っています。
+下記のようにサーバにsudo用の定義を行います。
 
 * /etc/stns/stns.conf
 
 ```toml
-salt_enable = true
-stretching_number = 100000
-
 [sudoers.example]
-password = "a3b20fc634ac4bad5be8a40566acb00adcd2e5bf2fb9be4750150553d529b799"
-hash_type = "sha256"
+password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
 ```
 
-`hash_type`には`sha256`と`sha512`が指定可能です。パスワードハッシュについては[stns-passwd](https://github.com/STNS/stns-passwd)コマンドを利用してください。
+パスワードハッシュについては[stns-passwd](https://github.com/STNS/stns-passwd)コマンドを利用してください。
 
 ```
-$ stns-passwd -s example -c 1000000 p@ssword
-a3b20fc634ac4bad5be8a40566acb00adcd2e5bf2fb9be4750150553d529b799
+$ stns-passwd p@ssword
+$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/
 ```
 
 次にクライアントのpamの設定を行います。
@@ -111,8 +107,7 @@ STNSではユーザーごとにパスワードハッシュを定義すること�
 id = 1000
 group_id = 1000
 directory = "/home/example"
-password = "f2ca1bb6c7e907d06dafe4687e579fce76b37e4e93b7605022da52e6ccc26fd2"
-hash_type = "sha256"
+password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
 ```
 
 このように定義した状態でクライアント側のpamを下記のように定義します。

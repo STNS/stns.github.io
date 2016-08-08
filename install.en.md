@@ -161,7 +161,7 @@ $ /usr/sbin/nscd -i passwd
 
 ```
 PubkeyAuthentication yes
-AuthorizedKeysCommand /usr/local/bin/stns-key-wrapper
+AuthorizedKeysCommand /usr/lib/stns/stns-key-wrapper
 AuthorizedKeysCommandUser root
 ```
 

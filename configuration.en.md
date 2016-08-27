@@ -23,6 +23,10 @@ include = "/etc/stns/conf.d/*"
 user = "basic_user"
 password = "basic_password"
 
+# support salt for password encryption strength
+salt_enable = true
+stretching_number = 10
+
 [users.example]
 id = 1001
 group_id = 1001
@@ -47,6 +51,8 @@ password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4Em
 |include|include config directory|
 |user| basic authentication user|
 |password| basic authentication password|
+|salt_enable| use salt. true or false|
+|stretching_number| increase the password encryption strength|
 
 ### Users
 

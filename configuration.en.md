@@ -3,25 +3,22 @@ layout: default
 permalink: /en/configuration
 ---
 
-## Usage
-
-```
-$ ssh pyama@example.jp
-$ id pyama
-uid=1001(pyama) gid=1001(pyama) groups=1001(pyama)
-```
-
 ## config
 
-* /etc/stns/stns.conf
+### /etc/stns/stns.conf
 
 ```toml
 port = 1104
 include = "/etc/stns/conf.d/*"
 
-# support basic auth
+# basic auth
 user = "basic_user"
 password = "basic_password"
+
+# tls encrypt
+# tls_ca   = "keys/ca.pem"      # using only client authentication
+tls_cert = "keys/server.crt"
+tls_key  = "keys/server.key"
 
 [users.example]
 id = 1001
@@ -39,7 +36,7 @@ users = ["example"]
 password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
 ```
 
-### General
+#### General
 
 |Name|Description|
 |---|---|
@@ -47,8 +44,11 @@ password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4Em
 |include|include config directory|
 |user| basic authentication user|
 |password| basic authentication password|
+|tls_ca| ca public key(use only client authentication)|
+|tls_cert|server certificate|
+|tls_key|server private key|
 
-### Users
+#### Users
 
 |Name|Description|
 |---|---|
@@ -61,7 +61,7 @@ password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4Em
 |link_users|merge public key from the specified user|
 |password| password token|
 
-#### link_users
+##### link_users
 
 link_users params is merge public key from the specified user
 
@@ -81,7 +81,7 @@ $ /user/local/bin/stns-key-wrapper example2
 ssh-rsa bbb
 ```
 
-### Groups
+#### Groups
 
 |Name|Description|
 |---|---|
@@ -89,7 +89,7 @@ ssh-rsa bbb
 |users|user name of the members|
 |link_groups|merge from belong to the other group users|
 
-#### link_groups
+##### link_groups
 It can be used to represent the organizational structure
 
 ```toml
@@ -115,10 +115,51 @@ $ /user/local/bin/stns-query-wrapper /group/name/division
 }
 ```
 
-### Sudoers
+#### Sudoers
 
 |Name|Description|
 |---|---|
 |password(※)| password token|
 
 ※: required parameter
+
+
+### /etc/stns/libnss-stns.conf
+
+```toml
+api_end_point = ["http://api01.example.com","http://api02.example.com"]
+request_time_out = 3
+
+# basic auth
+user = "basic_user"
+password = "basic_password"
+
+# tls client authentication
+tls_ca   = "keys/ca.pem"
+tls_cert = "keys/client.crt"
+tls_key  = "keys/client.key"
+
+ssl_verify = true
+wrapper_path = "/usr/local/bin/stns-query-wrapper"
+chain_ssh_wrapper = "/usr/libexec/openssh/ssh-ldap-wrapper"
+http_proxy = "http://proxy.com:8080"
+
+[request_header]
+x-api-key = "xxxxxxx"
+```
+
+#### General
+
+|Name|Description|
+|---|---|
+|api_end_point|api endpoints|
+|request_time_out|http request timeout in wrapper command|
+|user| basic authentication user|
+|password| basic authentication password|
+|ssl_verify| verify certs|
+|tls_ca| ca public key|
+|tls_cert|client certificate|
+|tls_key|client private key|
+|http_proxy|http proxy server|
+|request_hearder| http request header|
+

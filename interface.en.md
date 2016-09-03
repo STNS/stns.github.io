@@ -16,7 +16,7 @@ permalink: /en/interface
 |/group/name/:group_name|find by group name|
 |/group/id/:gid|find by group id|
 |/sudo/name/:sudo_user_name|find by sudo user name|
-
+|/healthcheck|health check url|
 
 - Metadata
 

@@ -86,7 +86,7 @@ You can create a special user account for `sudo` like below. It can be considere
 
 ```toml
 [sudoers.example]
-password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
+password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ..."
 ```
 You can use [stns-passwd](https://github.com/STNS/stns-passwd) to get such a hashed password.
 
@@ -123,7 +123,7 @@ You can also set hashed passwords for each users like below:
 id        = 1000
 group_id  = 1000
 directory = "/home/example"
-password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
+password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ..."
 ```
 
 ##### Client

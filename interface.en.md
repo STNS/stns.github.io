@@ -218,6 +218,8 @@ $ stns-query-wrapper /group/id/1001
 
 sudoers query only name.
 
+- request
+
 ```
 $ curl http://localhost:1104/v2/sudo/name/example1
 or

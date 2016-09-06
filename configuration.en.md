@@ -128,7 +128,7 @@ $ /user/local/bin/stns-query-wrapper /group/name/division
 
 ```toml
 api_end_point = ["http://api01.example.com","http://api02.example.com"]
-request_time_out = 3
+request_timeout = 3
 
 # basic auth
 user = "basic_user"
@@ -153,7 +153,7 @@ x-api-key = "xxxxxxx"
 |Name|Description|
 |---|---|
 |api_end_point|api endpoints|
-|request_time_out|http request timeout in wrapper command|
+|request_timeout|http request timeout in wrapper command|
 |user| basic authentication user|
 |password| basic authentication password|
 |ssl_verify| verify certs|

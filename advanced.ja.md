@@ -72,7 +72,7 @@ STNSにsudo用のアカウントを設け、パスワードを管理すること
 
 ```toml
 [sudoers.example]
-password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
+password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ..."
 ```
 
 パスワードハッシュについては[stns-passwd](https://github.com/STNS/stns-passwd)コマンドを利用してください。
@@ -107,7 +107,7 @@ STNSではユーザーごとにパスワードハッシュを定義すること�
 id = 1000
 group_id = 1000
 directory = "/home/example"
-password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
+password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ..."
 ```
 
 このように定義した状態でクライアント側のpamを下記のように定義します。

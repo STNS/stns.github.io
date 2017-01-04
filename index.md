@@ -11,7 +11,7 @@ layout: default
 1. Installation Guide: [English](/en/install) / [日本語](/ja/install)
 2. Configuration: [English](/en/configuration)
 3. Advanced Guide: [English](/en/advanced) / [日本語](/ja/advanced)
-2. Intreface Guide: [English](/en/interface)
+2. Interface Guide: [English](/en/interface)
 
 ## Architecture
 

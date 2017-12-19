@@ -143,7 +143,7 @@ AuthorizedKeysCommand /usr/lib/stns/stns-key-wrapper
 AuthorizedKeysCommandUser root
 ```
 
-公開鍵認証を許可し、公開鍵取得コマンドに`/usr/local/bin/stns-key-wrapper`を設定してください。設定後sshdを再起動しましょう。
+公開鍵認証を許可し、公開鍵取得コマンドに`/usr/lib/stns/stns-key-wrapper`を設定してください。設定後sshdを再起動しましょう。
 
 ```
 service sshd restart

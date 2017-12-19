@@ -168,7 +168,7 @@ AuthorizedKeysCommandUser root
 This configuration means that tha SSH server:
 
 * Activates SSH Public key authentication.
-* Use `/usr/local/bin/stns-key-wrapper` to retrieve the public key for the login user.
+* Use `/usr/lib/stns/stns-key-wrapper` to retrieve the public key for the login user.
 
 Reload sshd right after the modifying the configuration file.
 

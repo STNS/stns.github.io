@@ -5,7 +5,8 @@ permalink: /en/configuration
 
 ## config
 
-### /etc/stns/stns.conf
+### server
+- /etc/stns/server/stns.conf
 
 ```toml
 port = 1104
@@ -14,11 +15,6 @@ include = "/etc/stns/conf.d/*"
 # basic auth
 user = "basic_user"
 password = "basic_password"
-
-# tls encrypt
-# tls_ca   = "keys/ca.pem"      # using only client authentication
-tls_cert = "keys/server.crt"
-tls_key  = "keys/server.key"
 
 [users.example]
 id = 1001
@@ -31,9 +27,6 @@ link_users = ["foo"]
 [groups.example]
 id = 1001
 users = ["example"]
-
-[sudoers.example]
-password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4EmCd1RfUM6rfviIpAwncNpnF9Yjyc0.30c2dN1J/"
 ```
 
 #### General
@@ -44,9 +37,6 @@ password = "$6$ZbcEUwqLWMcV7fr5$4krw.1ULrmZytoMwuV5.pIqjEo1Ngc9K15zYQ.KGZa.8T4Em
 |include|include config directory|
 |user| basic authentication user|
 |password| basic authentication password|
-|tls_ca| ca public key(use only client authentication)|
-|tls_cert|server certificate|
-|tls_key|server private key|
 
 #### Users
 
@@ -73,11 +63,12 @@ link_users = ["example2"] ←
 [users.example2]
 keys = ["ssh-rsa bbb"]
 ```
+
 ```
-$ /user/local/bin/stns-key-wrapper example1
+$ /usr/lib/stns/stns-key-wrapper example1
 ssh-rsa aaa
 ssh-rsa bbb
-$ /user/local/bin/stns-key-wrapper example2
+$ /usr/lib/stns/stns-key-wrapper example2
 ssh-rsa bbb
 ```
 
@@ -103,64 +94,46 @@ users = ["user2"]
 ```
 
 ```sh
-$ /user/local/bin/stns-query-wrapper /group/name/department
-{
+$ curl http://stns.example.com/v1/groups?name=department
+[{
   …
   "users": ["user1", "user2"]
-}
-$ /user/local/bin/stns-query-wrapper /group/name/division
-{
+}]
+
+$ curl http://stns.example.com/v1/groups?name=division
+[{
   …
   "users": ["user2"]
-}
+}]
 ```
 
-#### Sudoers
 
-|Name|Description|
-|---|---|
-|password(※)| password token|
-
-※: required parameter
-
-
-### /etc/stns/libnss-stns.conf
+### client
+- /etc/stns/client/stns.conf
 
 ```toml
-api_end_point = ["http://api01.example.com","http://api02.example.com"]
+api_endpoint = "http://api01.example.com/v1"
 request_timeout = 3
 retry_request = 1
 # basic auth
 user = "basic_user"
 password = "basic_password"
 
-# tls client authentication
-tls_ca   = "keys/ca.pem"
-tls_cert = "keys/client.crt"
-tls_key  = "keys/client.key"
-
 ssl_verify = true
-wrapper_path = "/usr/local/bin/stns-query-wrapper"
+query_wrapper = "/usr/local/bin/stns-query-wrapper"
 chain_ssh_wrapper = "/usr/libexec/openssh/ssh-ldap-wrapper"
-http_proxy = "http://proxy.com:8080"
 
-[request_header]
-x-api-key = "xxxxxxx"
 ```
 
 #### General
 
 |Name|Description|
 |---|---|
-|api_end_point|api endpoints|
+|api_endpoint|api endpoints|
 |request_timeout|http request timeout in wrapper command|
 |retry_request|http request of retries|
 |user| basic authentication user|
 |password| basic authentication password|
 |ssl_verify| verify certs|
-|tls_ca| ca public key|
-|tls_cert|client certificate|
-|tls_key|client private key|
-|http_proxy|http proxy server|
-|request_hearder| http request header|
-
+|query_wrapper| Please use it when acquiring information with arbitrary script|
+|chain_ssh_wrapperr| Please use to obtain public key from other than stns|

@@ -119,6 +119,7 @@ $ curl http://stns.example.com/v1/groups?name=division
 
 ```toml
 api_endpoint = "http://api01.example.com/v1"
+http_proxy = "http://localhost:8080"
 request_timeout = 3
 request_retry = 1
 request_locktime = 600
@@ -141,6 +142,7 @@ negative_cache_ttl = 600
 
 uid_shift = 2000
 gid_shift = 2000
+
 ```
 
 #### General
@@ -151,6 +153,7 @@ gid_shift = 2000
 |request_timeout|http request timeout in wrapper command|10|
 |request_retry|http request of retries|3|
 |request_locktime|request lock when after request timeout|60|
+|http_proxy|use http proxy|-|
 |ssl_verify| verify certs| true|
 |user| basic authentication user|-|
 |password| basic authentication password|-|

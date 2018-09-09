@@ -16,13 +16,11 @@ $ curl -fsSL https://repo.stns.jp/scripts/yum-repo.sh | sh
 $ curl -fsSL https://repo.stns.jp/scripts/apt-repo.sh | sh
 ```
 
-サーバとクライントをインストールします。サーバは通常は専用のホストを設けて運用すると思いますが、手順書の便宜上同じホストと言う前提で記載しています。
-クライアントは`libnss-stns`と`libpam-stns`に分離しています。また本手順はrhel系のコマンドを利用しますが、debian系でも同等の作業可能です。
-
-STNSに加えて名前解決のキャッシュを行うためにnscdをインストールします。
+サーバとクライントをインストールします。サーバは通常は専用のホストを設けて運用すると思いますが、ドキュメントの便宜上同じホストと言う前提で記載しています。
+また本手順はrhel系のコマンドを利用しますが、debian系でも同等の作業可能です。
 
 ```
-$ yum install stns libnss-stns libpam-stns nscd
+$ yum install stns-v2 libnss-stns-v2
 ```
 
 ## 設定ファイル
@@ -30,7 +28,7 @@ $ yum install stns libnss-stns libpam-stns nscd
 ### サーバ
 インストールが完了したらサーバの設定から行います。
 
-* /etc/stns/stns.conf
+* /etc/stns/server/stns.conf
 
 ```toml
 port = 1104
@@ -59,58 +57,25 @@ $ service stns reload
 ```
 
 ### クライアント
-まずnscdの設定を行います。ユーザーとグループ名の名前解決をキャッシュし、それ以外はキャッシュしない設定にしています。
 
-* /etc/nscd.conf
-
-```
-enable-cache            passwd          yes
-positive-time-to-live   passwd          180
-negative-time-to-live   passwd          300
-check-files             passwd          yes
-shared                  group           yes
-
-enable-cache            group           yes
-positive-time-to-live   group           180
-negative-time-to-live   group           300
-check-files             group           yes
-shared                  group           yes
-
-enable-cache            hosts           no
-enable-cache            services        no
-enable-cache            netgroup        no
-```
-
-設定が完了したらnscdをreloadしてください。
-
-```
-$ service nscd reload
-```
-
-次にstnsの設定を行います。
-
-* /etc/stns/libnss_stns.conf
+* /etc/stns/client/stns.conf
 
 
 ```toml
-api_end_point = ["http://<server-ip>:1104/v2"]
+api_endpoint = "http://<server-ip>:1104/v1"
 
 user = "test_user"
 password = "test_password"
-
-wrapper_path = "/usr/local/bin/stns-query-wrapper"
 
 chain_ssh_wrapper = "/usr/libexec/openssh/ssh-ldap-wrapper"
 
 ssl_verify = true
 
 request_timeout = 3
-
-http_proxy = "http://your.proxy.com"
 ```
 
 設定としてはサーバのエンドポイント、ベーシック認証のID、パスワードを定義しています。`chain_ssh_wrapper`についてはSSHログイン時の公開鍵を取得する際にSTNSに加えて取得先がある場合に取得コマンドを定義します。定義されたコマンドに`ユーザー名`を引数に渡して取得を試みます。
-`ssl_verify`についてはSTNSサーバをnginxなどと組み合わせてSSL対応した際に証明証の照合エラーを無視するか否かの設定です。`false`に設定した場合に証明証のエラーを無視します。プロキシサーバが必要な環境においては`http_proxy`もしくは環境変数`HTTP_PROXY`にプロキシサーバのURLを指定してください。
+`ssl_verify`についてはSTNSサーバをnginxなどと組み合わせてSSL対応した際に証明証の照合エラーを無視するか否かの設定です。`false`に設定した場合に証明証のエラーを無視します。
 
 * /etc/nsswitch.conf
 
@@ -121,17 +86,7 @@ group:      files stns
 ```
 
 nsswitch.confにstnsを追加し、stns経由での名前解決を有効にします。ldapを利用している場合は`passwd:     files stns ldap`のように記載することで併用可能です。
-この時点で下記のように名前解決が出来ない場合はnscdがネガティブキャッシュしている可能性があるのでキャッシュを削除してください。
 
-```
-$  id example
-uid=1001(example) gid=1001(example) groups=1001(example)
-```
-
-キャッシュの削除
-```
-$ /usr/sbin/nscd -i passwd
-```
 
 最後にSSHログインを可能にするため、sshdの設定を行います。
 

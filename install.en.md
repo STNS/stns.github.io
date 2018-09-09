@@ -25,10 +25,10 @@ $ curl -fsSL https://repo.stns.jp/scripts/apt-repo.sh | sh
 
 Although we use commands for RHEL in what follows, the equivalent commands will work also for Debian family.
 
-You can install STNS server by installing the `stns` package. The STNS client consists of two packages: `libnss-stns` and `libpam-stns`. Additionally, you have to install nscd to cache result of name resolution.
+You can install STNS server by installing the `stns-v2` package. The STNS client consists of packages: `libnss-stns-v2`.
 
 ```
-$ yum install stns libnss-stns libpam-stns nscd
+$ yum install stns-v2 libnss-stns-v2
 ```
 
 ## Configuration
@@ -37,7 +37,7 @@ $ yum install stns libnss-stns libpam-stns nscd
 
 After successfully installing packages, let's configure STNS server.
 
-`/etc/stns/stns.conf`:
+`/etc/stns/server/stns.conf`:
 
 ```toml
 port     = 1104
@@ -72,46 +72,15 @@ $ service stns reload
 ```
 
 ### STNS Client
+**Firstly**, configure STNS client.
 
-**Firstly**, configure nscd to cache result of user and group names resolution. This configuration means that the system caches only user and group names.
-
-`/etc/nscd.conf`:
-
-```
-enable-cache            passwd          yes
-positive-time-to-live   passwd          180
-negative-time-to-live   passwd          300
-check-files             passwd          yes
-shared                  group           yes
-
-enable-cache            group           yes
-positive-time-to-live   group           180
-negative-time-to-live   group           300
-check-files             group           yes
-shared                  group           yes
-
-enable-cache            hosts           no
-enable-cache            services        no
-enable-cache            netgroup        no
-```
-
-Reload nscd right after modifying the file to activate the new configuration.
-
-```
-$ service nscd reload
-```
-
-**Secondly**, configure STNS client.
-
-`/etc/stns/libnss_stns.conf`:
+`/etc/stns/client/stns.conf`:
 
 ```toml
-api_end_point     = ["http://<server-ip>:1104/v2"]
+api_endpoint     = "http://<server-ip>:1104/v1"
 
 user              = "test_user"
 password          = "test_password"
-
-wrapper_path      = "/usr/local/bin/stns-query-wrapper"
 
 chain_ssh_wrapper = "/usr/libexec/openssh/ssh-ldap-wrapper"
 
@@ -119,7 +88,6 @@ ssl_verify        = true
 
 request_timeout = 3
 
-http_proxy = "http://your.proxy.com"
 ```
 
 This file configures the location of SNTS server, and the combination of id and password for basic authentication.
@@ -128,9 +96,7 @@ You can set a script path by `chain_ssh_wrapper` to retrieve SSH public key from
 
 `ssl_verify` tells if the client must verify or not the TLS certificate in the negotiation process with STNS server. If `false` is set, the client ignores the verification error of TLS certificate.
 
-You can set a URL of HTTP proxy server by `http_proxy` or by the environment valiable `HTTP_PROXY`.
-
-**Thirdly**, configure the name resolution order like below.
+**Secondly**, configure the name resolution order like below.
 
 `/etc/nsswitch.conf`:
 
@@ -141,19 +107,6 @@ group:      files stns
 ```
 
 Add snts into `nsswitch.conf` to enable name resolution using STNS. To use LDAP concurrently, you can configure like: `passwd: files stns ldap`.
-
-If name resolution fails like below, purge caches in case that nscd has negative caches.
-
-```
-$  id example
-uid=1001(example) gid=1001(example) groups=1001(example)
-```
-
-You can purge negative caches like below:
-
-```
-$ /usr/sbin/nscd -i passwd
-```
 
 **Lastly**, configure sshd to enable SSH login using STNS.
 

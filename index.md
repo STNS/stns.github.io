@@ -22,11 +22,6 @@ layout: default
 **STNS client** consists of several programs:
 
 * libnss-stns: an NSS module to resolve user name by STNS
-* libpam-stns: a PAM module to authenticate user by STNS
-* stns-query-wrapper: a program to request given user's information to STNS server
-* stns-key-wrapper: a program to request given user's SSH public key to STNS server
-
-For details, consult the documentation of [libnss_stns](https://github.com/STNS/libnss_stns).
 
 ## Comparison to Other Solutions
 

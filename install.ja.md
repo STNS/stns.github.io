@@ -34,9 +34,6 @@ $ yum install stns-v2 libnss-stns-v2
 port = 1104
 include = "/etc/stns/conf.d/*"
 
-user = "test_user"
-password = "test_password"
-
 [users.example]
 id = 1001
 group_id = 1001
@@ -48,7 +45,7 @@ users = ["example"]
 
 ```
 
-ベーシック認証を利用し、1104ポートで起動、`/etc/stns/conf.d/*`配下の設定ファイルを追加で読み込むように設定する例です。部署やチームごとに設定ファイルを分離し、運用するのが良いでしょう。
+1104ポートで起動、`/etc/stns/conf.d/*`配下の設定ファイルを追加で読み込むように設定する例です。部署やチームごとに設定ファイルを分離し、運用するのが良いでしょう。
 例ではユーザーexample、グループexampleを定義しています。
 設定を記述したらreloadしてください。
 
@@ -64,18 +61,9 @@ $ service stns reload
 ```toml
 api_endpoint = "http://<server-ip>:1104/v1"
 
-user = "test_user"
-password = "test_password"
-
-chain_ssh_wrapper = "/usr/libexec/openssh/ssh-ldap-wrapper"
-
-ssl_verify = true
-
-request_timeout = 3
 ```
 
-設定としてはサーバのエンドポイント、ベーシック認証のID、パスワードを定義しています。`chain_ssh_wrapper`についてはSSHログイン時の公開鍵を取得する際にSTNSに加えて取得先がある場合に取得コマンドを定義します。定義されたコマンドに`ユーザー名`を引数に渡して取得を試みます。
-`ssl_verify`についてはSTNSサーバをnginxなどと組み合わせてSSL対応した際に証明証の照合エラーを無視するか否かの設定です。`false`に設定した場合に証明証のエラーを無視します。
+設定としてはサーバのエンドポイントを定義しています。
 
 * /etc/nsswitch.conf
 

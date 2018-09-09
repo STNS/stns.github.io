@@ -13,8 +13,13 @@ port = 1104
 include = "/etc/stns/conf.d/*"
 
 # basic auth
+[basic_auth]
 user = "basic_user"
 password = "basic_password"
+
+# token auth
+[token_auth]
+tokens = ["xxxxxxx"]
 
 [users.example]
 id = 1001
@@ -31,12 +36,13 @@ users = ["example"]
 
 #### General
 
-|Name|Description|
-|---|---|
-|port|listen port|
-|include|include config directory|
-|user| basic authentication user|
-|password| basic authentication password|
+|Name|Description|Default|
+|---|---|---|
+|port|listen port| 1104|
+|include|include config directory| -|
+|basic_auth - user| basic authentication user| -|
+|basic_auth - password| basic authentication password|-|
+|token_auth - tokens| token authentication tokens|-|
 
 #### Users
 
@@ -114,26 +120,46 @@ $ curl http://stns.example.com/v1/groups?name=division
 ```toml
 api_endpoint = "http://api01.example.com/v1"
 request_timeout = 3
-retry_request = 1
+request_retry = 1
+request_locktime = 600
+ssl_verify = true
+
 # basic auth
 user = "basic_user"
 password = "basic_password"
 
-ssl_verify = true
+# token auth
+auth_token = "token"
+
 query_wrapper = "/usr/local/bin/stns-query-wrapper"
 chain_ssh_wrapper = "/usr/libexec/openssh/ssh-ldap-wrapper"
 
+cache = true
+cache_dir = "/var/cache/stns/"
+cache_ttl = 600
+negative_cache_ttl = 600
+
+uid_shift = 2000
+gid_shift = 2000
 ```
 
 #### General
 
-|Name|Description|
-|---|---|
-|api_endpoint|api endpoints|
-|request_timeout|http request timeout in wrapper command|
-|retry_request|http request of retries|
-|user| basic authentication user|
-|password| basic authentication password|
-|ssl_verify| verify certs|
-|query_wrapper| Please use it when acquiring information with arbitrary script|
-|chain_ssh_wrapperr| Please use to obtain public key from other than stns|
+|Name|Description|Default|
+|---|---|---|
+|api_endpoint|api endpoints|http://localhost:1104/v1|
+|request_timeout|http request timeout in wrapper command|10|
+|request_retry|http request of retries|3|
+|request_locktime|request lock when after request timeout|60|
+|ssl_verify| verify certs| true|
+|user| basic authentication user|-|
+|password| basic authentication password|-|
+|auth_token| token authentication token|-|
+|query_wrapper| use it when acquiring information with arbitrary script| -|
+|chain_ssh_wrapperr| use to obtain public key from other than stns|-|
+|cache| use requst cache|true|
+|cache_dir|save cache directory | /var/cache/stns|
+|cache_ttl|cache ttl | 600|
+|negative_cache_ttl|cache ttl when resource notfound |60|
+|uid_shift|user id shift from stns response user id |0|
+|gid_shift|group id shift from stns response group id |0|

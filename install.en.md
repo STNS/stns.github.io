@@ -43,9 +43,6 @@ After successfully installing packages, let's configure STNS server.
 port     = 1104
 include  = "/etc/stns/conf.d/*"
 
-user     = "test_user"
-password = "test_password"
-
 [users.example]
 id       = 1001
 group_id = 1001
@@ -58,7 +55,6 @@ users    = ["example"]
 
 This configuration means that the STNS server:
 
-* Utilizes basic authentication to restrict requests.
 * Listens to 1104 port.
 * Includes additional configurations placed under `/etc/stns/conf.d`.
 * Defines example user and group.
@@ -78,23 +74,7 @@ $ service stns reload
 
 ```toml
 api_endpoint     = "http://<server-ip>:1104/v1"
-
-user              = "test_user"
-password          = "test_password"
-
-chain_ssh_wrapper = "/usr/libexec/openssh/ssh-ldap-wrapper"
-
-ssl_verify        = true
-
-request_timeout = 3
-
 ```
-
-This file configures the location of SNTS server, and the combination of id and password for basic authentication.
-
-You can set a script path by `chain_ssh_wrapper` to retrieve SSH public key from other place except for STNS server. STNS client executes the script with a user name as an argument.
-
-`ssl_verify` tells if the client must verify or not the TLS certificate in the negotiation process with STNS server. If `false` is set, the client ignores the verification error of TLS certificate.
 
 **Secondly**, configure the name resolution order like below.
 

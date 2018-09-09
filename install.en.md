@@ -64,7 +64,7 @@ We encourage you to set configurations for each teams into separate files.
 Reload the server right after modifying the file to activate the new configuration.
 
 ```
-$ service stns reload
+$ service stns restart
 ```
 
 ### STNS Client

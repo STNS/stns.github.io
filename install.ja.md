@@ -47,10 +47,10 @@ users = ["example"]
 
 1104ポートで起動、`/etc/stns/conf.d/*`配下の設定ファイルを追加で読み込むように設定する例です。部署やチームごとに設定ファイルを分離し、運用するのが良いでしょう。
 例ではユーザーexample、グループexampleを定義しています。
-設定を記述したらreloadしてください。
+設定を記述したらrestartしてください。
 
 ```
-$ service stns reload
+$ service stns restart
 ```
 
 ### クライアント

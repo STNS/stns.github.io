@@ -150,7 +150,7 @@ gid_shift = 2000
 |Name|Description|Default|
 |---|---|---|
 |api_endpoint|api endpoints|http://localhost:1104/v1|
-|request_timeout|http request timeout in wrapper command|10|
+|request_timeout|http request timeout|10|
 |request_retry|http request of retries|3|
 |request_locktime|request lock when after request timeout|60|
 |http_proxy|use http proxy|-|

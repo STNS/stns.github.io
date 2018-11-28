@@ -110,4 +110,4 @@ service sshd restart
 ```
 
 Installation of STNS has been finally completed!
-
+In addition, since SELinux is not supported at present, if you do not operate properly please disable SELinux and try.

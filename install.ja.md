@@ -92,4 +92,4 @@ AuthorizedKeysCommandUser root
 service sshd restart
 ```
 
-以上でSTNSのインストールは完了です。
+以上でSTNSのインストールは完了です。また現状はSELinuxに対応していないため、正常に動かない場合はSELinuxを無効にしてお試しください。

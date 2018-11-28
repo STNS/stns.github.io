@@ -88,6 +88,13 @@ group:      files stns
 
 Add snts into `nsswitch.conf` to enable name resolution using STNS. To use LDAP concurrently, you can configure like: `passwd: files stns ldap`.
 
+If systemd-logind does not allow network access, you can not make HTTP request, so please allow it if necessary.
+
+`` `
+$ sed -i "s / ^ IPAddressDeny = any / # IPAddressDeny = any /" / lib / systemd / system / systemd - logind.service
+$ systemctl restart systemd-logind
+`` `
+
 **Lastly**, configure sshd to enable SSH login using STNS.
 
 `/etc/sshd/sshd_config`:

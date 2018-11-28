@@ -75,6 +75,12 @@ group:      files stns
 
 nsswitch.confにstnsを追加し、stns経由での名前解決を有効にします。ldapを利用している場合は`passwd:     files stns ldap`のように記載することで併用可能です。
 
+systemd-logindがネットワークアクセスを許可しない設定の場合、HTTPリクエストができないため、必要に応じて許可してください。
+
+```
+$ sed -i "s/^IPAddressDeny=any/#IPAddressDeny=any/" /lib/systemd/system/systemd-logind.service
+$ systemctl restart systemd-logind
+```
 
 最後にSSHログインを可能にするため、sshdの設定を行います。
 

@@ -21,6 +21,12 @@ password = "basic_password"
 [token_auth]
 tokens = ["xxxxxxx"]
 
+# tls encrypt
+[tls]
+# ca = "/etc/stns/keys/ca.pem"     # using only client authentication
+cert = "/etc/stns/keys/server.crt"
+key  = "/etc/stns/keys/server.key"
+
 [users.example]
 id = 1001
 group_id = 1001
@@ -43,6 +49,9 @@ users = ["example"]
 |basic_auth - user| basic authentication user| -|
 |basic_auth - password| basic authentication password|-|
 |token_auth - tokens| token authentication tokens|-|
+|tls - ca| ca public key(use only client authentication)|-|
+|tls - cert| server certificate|-|
+|tls - key| server private key|-|
 
 #### Users
 
@@ -143,6 +152,10 @@ negative_cache_ttl = 600
 uid_shift = 2000
 gid_shift = 2000
 
+# tls client authentication
+[tls]
+cert = "/etc/stns/keys/client.crt"
+key  = "/etc/stns/keys/client.key"
 ```
 
 #### General
@@ -166,3 +179,5 @@ gid_shift = 2000
 |negative_cache_ttl|cache ttl when resource notfound |60|
 |uid_shift|user id shift from stns response user id |0|
 |gid_shift|group id shift from stns response group id |0|
+|tls - cert| client certificate|-|
+|tls - key| client private key|-|

@@ -56,3 +56,17 @@ uid=1001(user1) gid=1002(division) groups=1001(department),1002(division)
 ```
 
 これによりuser2はdepartmentに所属するdivisionのユーザーということを表現できます。
+
+### LDAP インターフェース
+起動オプションを切り替えることでLDAPプロトコルに対応できます。
+
+```bash
+$ stns --protocol ldap
+```
+
+### AWS S3からの設定読み込み
+AWS S3から設定ファイルを読み込むことができます。
+
+```bash
+$ stns --config s3://bucketname/config.toml
+```

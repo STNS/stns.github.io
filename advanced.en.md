@@ -68,3 +68,17 @@ You can confirm it by executing `id` command like below:
 $ id user2
 uid=1001(user1) gid=1002(division) groups=1001(department),1002(division)
 ```
+
+### LDAP Interface
+STNS provides an LDAP interface by changing the startup command
+
+```bash
+$ stns --protocol ldap
+```
+
+### Config read from AWS S3
+STNS can read configuration files from s3
+
+```bash
+$ stns --config s3://bucketname/config.toml
+```

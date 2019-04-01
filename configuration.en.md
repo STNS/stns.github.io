@@ -11,7 +11,8 @@ permalink: /en/configuration
 ```toml
 port = 1104
 include = "/etc/stns/conf.d/*"
-
+module_path = "/usr/local/stns/modules.d"
+load_module = "mod_stns_etcd.so"
 # basic auth
 [basic_auth]
 user = "basic_user"
@@ -38,6 +39,9 @@ link_users = ["foo"]
 [groups.example]
 id = 1001
 users = ["example"]
+
+[modules.etcd]
+endpoints = ["http://127.0.0.1:2379"]
 ```
 
 #### General
@@ -46,12 +50,20 @@ users = ["example"]
 |---|---|---|
 |port|listen port| 1104|
 |include|include config directory| -|
+|module_path|module include path| /usr/local/stns/modules.d|
+|load_module|include module name| -|
 |basic_auth - user| basic authentication user| -|
 |basic_auth - password| basic authentication password|-|
 |token_auth - tokens| token authentication tokens|-|
 |tls - ca| ca public key(use only client authentication)|-|
 |tls - cert| server certificate|-|
 |tls - key| server private key|-|
+|ldap - base_dn | ldap server base dn|dc=stns,dc=local|
+|redis - host | redis host name |-|
+|redis - user | redis username |-|
+|redis - password| redis password|-|
+|redis - ttl| redis ttl|-|
+|redis - db| redis db id|-|
 
 #### Users
 
@@ -107,6 +119,21 @@ link_groups = ["division"]
 users = ["user2"]
 
 ```
+#### Modules
+##### Etcd
+|Name|Description|
+|---|---|
+|endpoints| etcd urls|
+|user|etcd url|
+|password|etcd password|
+
+##### DynamoDB
+|Name|Description|
+|---|---|
+|read_capacity_units| table read capacity units|
+|write_capacity_units| table write capacity units|
+|user_table_name| user table name|
+|group_table_name| group table name|
 
 ```sh
 $ curl http://stns.example.com/v1/groups?name=department

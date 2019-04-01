@@ -119,6 +119,21 @@ link_groups = ["division"]
 users = ["user2"]
 
 ```
+
+```sh
+$ curl http://stns.example.com/v1/groups?name=department
+[{
+  …
+  "users": ["user1", "user2"]
+}]
+
+$ curl http://stns.example.com/v1/groups?name=division
+[{
+  …
+  "users": ["user2"]
+}]
+```
+
 #### Modules
 ##### Etcd
 
@@ -136,20 +151,6 @@ users = ["user2"]
 |write_capacity_units| table write capacity units|
 |user_table_name| user table name|
 |group_table_name| group table name|
-
-```sh
-$ curl http://stns.example.com/v1/groups?name=department
-[{
-  …
-  "users": ["user1", "user2"]
-}]
-
-$ curl http://stns.example.com/v1/groups?name=division
-[{
-  …
-  "users": ["user2"]
-}]
-```
 
 
 ### client

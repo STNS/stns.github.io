@@ -121,6 +121,7 @@ users = ["user2"]
 ```
 #### Modules
 ##### Etcd
+
 |Name|Description|
 |---|---|
 |endpoints| etcd urls|
@@ -128,6 +129,7 @@ users = ["user2"]
 |password|etcd password|
 
 ##### DynamoDB
+
 |Name|Description|
 |---|---|
 |read_capacity_units| table read capacity units|

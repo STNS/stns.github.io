@@ -52,16 +52,16 @@ endpoints = ["http://127.0.0.1:2379"]
 |include|include config directory| -|
 |module_path|module include path| /usr/local/stns/modules.d|
 |load_module|include module name| -|
-|basic_auth - user| basic authentication user| -|
-|basic_auth - password| basic authentication password|-|
-|token_auth - tokens| token authentication tokens|-|
+|basic_auth - user| basic authentication user(env:STNS_BASIC_AUTH_USER)| -|
+|basic_auth - password| basic authentication password(env:STNS_BASIC_AUTH_PASSWORD)|-|
+|token_auth - tokens| token authentication tokens(env:STNS_AUTH_TOKEN separetor is `,`)|-|
 |tls - ca| ca public key(use only client authentication)|-|
 |tls - cert| server certificate|-|
 |tls - key| server private key|-|
 |ldap - base_dn | ldap server base dn|dc=stns,dc=local|
 |redis - host | redis host name |-|
 |redis - user | redis username |-|
-|redis - password| redis password|-|
+|redis - password| redis password(env:STNS_REDIS_PASSWORD)|-|
 |redis - ttl| redis ttl|-|
 |redis - db| redis db id|-|
 
@@ -141,7 +141,7 @@ $ curl http://stns.example.com/v1/groups?name=division
 |---|---|
 |endpoints| etcd urls|
 |user|etcd url|
-|password|etcd password|
+|password|etcd password(env:STNS_ETCD_PASSWORD)|
 
 ##### DynamoDB
 

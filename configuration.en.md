@@ -137,21 +137,22 @@ $ curl http://stns.example.com/v1/groups?name=division
 #### Modules
 ##### Etcd
 
-|Name|Description|
-|---|---|
-|endpoints| etcd urls|
-|user|etcd url|
-|password|etcd password(env:STNS_ETCD_PASSWORD)|
+|Name|Description|Type|
+|---|---|---|
+|endpoints| etcd urls| strings|
+|user|etcd user| string|
+|password|etcd password(env:STNS_ETCD_PASSWORD)| string |
+|sync|sync config from toml file(exclude user password)| bool|
 
 ##### DynamoDB
 
-|Name|Description|
-|---|---|
-|read_capacity_units| table read capacity units|
-|write_capacity_units| table write capacity units|
-|user_table_name| user table name|
-|group_table_name| group table name|
-
+|Name|Description||Type|
+|---|---||---|
+|read_capacity_units| table read capacity units|int|
+|write_capacity_units| table write capacity units|int|
+|user_table_name| user table name|string|
+|group_table_name| group table name|string|
+|sync|sync config from toml file(exclude user password)| bool|
 
 ### client
 - /etc/stns/client/stns.conf

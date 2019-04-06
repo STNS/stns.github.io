@@ -154,6 +154,12 @@ $ curl http://stns.example.com/v1/groups?name=division
 |group_table_name| group table name|string|
 |sync|sync config from toml file(exclude user password)| bool|
 
+The following environment variables need to be set
+
+- AWS_ACCESS_KEY_ID
+- AWS_SECRET_ACCESS_KEY
+- AWS_REGION
+
 ### client
 - /etc/stns/client/stns.conf
 

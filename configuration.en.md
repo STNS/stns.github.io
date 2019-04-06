@@ -147,7 +147,7 @@ $ curl http://stns.example.com/v1/groups?name=division
 ##### DynamoDB
 
 |Name|Description||Type|
-|---|---||---|
+|---|---|---|
 |read_capacity_units| table read capacity units|int|
 |write_capacity_units| table write capacity units|int|
 |user_table_name| user table name|string|

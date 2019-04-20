@@ -44,7 +44,6 @@ link_groups = ["division"]
 
 [groups.division]
 users = ["user2"]
-
 ```
 
 この例では`department`グループに`user1`が所属しており、`division`グループには`user2`が所属しています。また`department`には`link_groups`に`division`を定義しております。

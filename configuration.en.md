@@ -210,7 +210,7 @@ key  = "/etc/stns/keys/client.key"
 |auth_token| token authentication token|-|
 |query_wrapper| use it when acquiring information with arbitrary script| -|
 |chain_ssh_wrapperr| use to obtain public key from other than stns|-|
-|cache| use requst cache|true|
+|cache| use request cache|true|
 |cache_dir|save cache directory | /var/cache/stns|
 |cache_ttl|cache ttl | 600|
 |negative_cache_ttl|cache ttl when resource notfound |60|

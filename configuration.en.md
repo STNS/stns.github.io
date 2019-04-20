@@ -54,7 +54,7 @@ endpoints = ["http://127.0.0.1:2379"]
 |load_module|include module name| -|
 |basic_auth - user| basic authentication user(env:STNS_BASIC_AUTH_USER)| -|
 |basic_auth - password| basic authentication password(env:STNS_BASIC_AUTH_PASSWORD)|-|
-|token_auth - tokens| token authentication tokens(env:STNS_AUTH_TOKEN separetor is `,`)|-|
+|token_auth - tokens| token authentication tokens(env:STNS_AUTH_TOKEN separator is `,`)|-|
 |tls - ca| ca public key(use only client authentication)|-|
 |tls - cert| server certificate|-|
 |tls - key| server private key|-|

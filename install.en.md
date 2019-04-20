@@ -7,7 +7,7 @@ permalink: /en/install
 
 We provides both YUM and APT repositories.
 
-You can install YUM/APT repository by executing the command below. Although you must want to install SNTS server and client into separate hosts, we here install them into the same host for the sake of simplicity of explanation.
+You can install YUM/APT repository by executing the command below. Although you must want to install STNS server and client into separate hosts, we here install them into the same host for the sake of simplicity of explanation.
 
 ### Install YUM Repository
 

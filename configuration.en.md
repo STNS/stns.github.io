@@ -54,7 +54,7 @@ endpoints = ["http://127.0.0.1:2379"]
 |load_module|include module name| -|
 |basic_auth - user| basic authentication user(env:STNS_BASIC_AUTH_USER)| -|
 |basic_auth - password| basic authentication password(env:STNS_BASIC_AUTH_PASSWORD)|-|
-|token_auth - tokens| token authentication tokens(env:STNS_AUTH_TOKEN separetor is `,`)|-|
+|token_auth - tokens| token authentication tokens(env:STNS_AUTH_TOKEN separator is `,`)|-|
 |tls - ca| ca public key(use only client authentication)|-|
 |tls - cert| server certificate|-|
 |tls - key| server private key|-|
@@ -209,8 +209,8 @@ key  = "/etc/stns/keys/client.key"
 |password| basic authentication password|-|
 |auth_token| token authentication token|-|
 |query_wrapper| use it when acquiring information with arbitrary script| -|
-|chain_ssh_wrapperr| use to obtain public key from other than stns|-|
-|cache| use requst cache|true|
+|chain_ssh_wrapper| use to obtain public key from other than stns|-|
+|cache| use request cache|true|
 |cache_dir|save cache directory | /var/cache/stns|
 |cache_ttl|cache ttl | 600|
 |negative_cache_ttl|cache ttl when resource notfound |60|

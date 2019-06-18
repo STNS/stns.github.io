@@ -60,7 +60,6 @@ $ service stns restart
 
 ```toml
 api_endpoint = "http://<server-ip>:1104/v1"
-
 ```
 
 設定としてはサーバのエンドポイントを定義しています。

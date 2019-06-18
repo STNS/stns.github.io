@@ -14,7 +14,7 @@ permalink: /en/interface
 
 ## 1.user
 
-- resposne detail
+- response detail
 
 |Name|Required|Description|
 |---|:---:|---|
@@ -91,7 +91,7 @@ $ curl http://localhost:1104/v1/users?name=example1
 
 ## 2.group
 
-- resposne detail
+- response detail
 
 |Name|Required|Description|
 |---|:---:|---|

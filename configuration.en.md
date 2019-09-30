@@ -191,6 +191,7 @@ gid_shift = 2000
 
 # tls client authentication
 [tls]
+ca   = "/etc/stns/keys/ca.pem"
 cert = "/etc/stns/keys/client.crt"
 key  = "/etc/stns/keys/client.key"
 ```
@@ -216,5 +217,6 @@ key  = "/etc/stns/keys/client.key"
 |negative_cache_ttl|cache ttl when resource notfound |60|
 |uid_shift|user id shift from stns response user id |0|
 |gid_shift|group id shift from stns response group id |0|
-|tls - cert| client certificate|-|
-|tls - key| client private key|-|
+|tls - ca|ca certificate|(Depends on cURL)|
+|tls - cert|client certificate|-|
+|tls - key|client private key|-|

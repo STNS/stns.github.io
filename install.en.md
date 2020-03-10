@@ -86,7 +86,7 @@ shadow:     files stns
 group:      files stns
 ```
 
-Add snts into `nsswitch.conf` to enable name resolution using STNS. To use LDAP concurrently, you can configure like: `passwd: files stns ldap`.
+Add stns into `nsswitch.conf` to enable name resolution using STNS. To use LDAP concurrently, you can configure like: `passwd: files stns ldap`.
 
 If systemd-logind does not allow network access, you can not make HTTP request, so please allow it if necessary.
 

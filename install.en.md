@@ -74,9 +74,13 @@ $ service stns restart
 
 ```toml
 api_endpoint     = "http://<server-ip>:1104/v1"
+use_cached = true
 ```
 
-And you should restart cache-stnsd.
+If you append `use_cached = true` and to delegate cache function to cache-stnsd, should restart cache-stnsd.
+
+
+> Notice: `use_cached = true` is default value when libnss-stns-v2 2.9 later or libnss-stns-v3.
 
 ```
 $ service cache-stnsd restart

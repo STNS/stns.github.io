@@ -20,7 +20,7 @@ $ curl -fsSL https://repo.stns.jp/scripts/apt-repo.sh | sh
 また本手順はrhel系のコマンドを利用しますが、debian系でも同等の作業可能です。
 
 ```
-$ yum install stns-v2 libnss-stns-v2
+$ yum install stns-v2 libnss-stns-v2 cache-stnsd
 ```
 
 ## 設定ファイル
@@ -60,9 +60,17 @@ $ service stns restart
 
 ```toml
 api_endpoint = "http://<server-ip>:1104/v1"
+use_cached = true
 ```
 
 設定としてはサーバのエンドポイントを定義しています。
+`use_cached = true` を追記し、キャッシュ処理をcache-stnsdに移譲する場合(推奨)、cacheプロセスを再起動してください。
+
+> 注意: libnss-stns-v3において `use_cached = true` がデフォルト値となります。
+
+```
+$ service cache-stnsd restart
+```
 
 * /etc/nsswitch.conf
 
@@ -74,12 +82,6 @@ group:      files stns
 
 nsswitch.confにstnsを追加し、stns経由での名前解決を有効にします。ldapを利用している場合は`passwd:     files stns ldap`のように記載することで併用可能です。
 
-systemd-logindがネットワークアクセスを許可しない設定の場合、HTTPリクエストができないため、必要に応じて許可してください。
-
-```
-$ sed -i "s/^IPAddressDeny=any/#IPAddressDeny=any/" /lib/systemd/system/systemd-logind.service
-$ systemctl restart systemd-logind
-```
 
 最後にSSHログインを可能にするため、sshdの設定を行います。
 

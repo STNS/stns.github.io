@@ -28,7 +28,7 @@ Although we use commands for RHEL in what follows, the equivalent commands will 
 You can install STNS server by installing the `stns-v2` package. The STNS client consists of packages: `libnss-stns-v2`.
 
 ```
-$ yum install stns-v2 libnss-stns-v2
+$ yum install stns-v2 libnss-stns-v2 cache-stnsd
 ```
 
 ## Configuration
@@ -74,6 +74,16 @@ $ service stns restart
 
 ```toml
 api_endpoint     = "http://<server-ip>:1104/v1"
+use_cached = true
+```
+
+If you append `use_cached = true` and to delegate cache function to cache-stnsd, should restart cache-stnsd.
+
+
+> Notice: `use_cached = true` is default value when libnss-stns-v3.
+
+```
+$ service cache-stnsd restart
 ```
 
 **Secondly**, configure the name resolution order like below.
@@ -88,12 +98,6 @@ group:      files stns
 
 Add stns into `nsswitch.conf` to enable name resolution using STNS. To use LDAP concurrently, you can configure like: `passwd: files stns ldap`.
 
-If systemd-logind does not allow network access, you can not make HTTP request, so please allow it if necessary.
-
-`` `
-$ sed -i "s / ^ IPAddressDeny = any / # IPAddressDeny = any /" / lib / systemd / system / systemd - logind.service
-$ systemctl restart systemd-logind
-`` `
 
 **Lastly**, configure sshd to enable SSH login using STNS.
 

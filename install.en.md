@@ -80,7 +80,7 @@ use_cached = true
 If you append `use_cached = true` and to delegate cache function to cache-stnsd, should restart cache-stnsd.
 
 
-> Notice: `use_cached = true` is default value when libnss-stns-v2 2.9 later or libnss-stns-v3.
+> Notice: `use_cached = true` is default value when libnss-stns-v3.
 
 ```
 $ service cache-stnsd restart

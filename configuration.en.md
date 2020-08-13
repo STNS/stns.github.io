@@ -194,6 +194,10 @@ gid_shift = 2000
 ca   = "/etc/stns/keys/ca.pem"
 cert = "/etc/stns/keys/client.crt"
 key  = "/etc/stns/keys/client.key"
+
+[cached]
+enable = true
+prefetch = true
 ```
 
 #### General
@@ -220,3 +224,5 @@ key  = "/etc/stns/keys/client.key"
 |tls - ca|ca certificate|(Depends on cURL)|
 |tls - cert|client certificate|-|
 |tls - key|client private key|-|
+|cached - enable|enable cached|false|
+|cached - prefetch|resource prefech inteval cache ttl|false|

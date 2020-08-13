@@ -60,13 +60,14 @@ $ service stns restart
 
 ```toml
 api_endpoint = "http://<server-ip>:1104/v1"
-use_cached = true
+[cached]
+enable = true
 ```
 
 設定としてはサーバのエンドポイントを定義しています。
-`use_cached = true` を追記し、キャッシュ処理をcache-stnsdに移譲する場合(推奨)、cacheプロセスを再起動してください。
+`[cached].enable = true` を追記し、キャッシュ処理をcache-stnsdに移譲する場合(推奨)、cacheプロセスを再起動してください。
 
-> 注意: libnss-stns-v3において `use_cached = true` がデフォルト値となります。
+> 注意: libnss-stns-v3において `[cached].enable = true` がデフォルト値となります。
 
 ```
 $ service cache-stnsd restart

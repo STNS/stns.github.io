@@ -86,7 +86,7 @@ nsswitch.confにstnsを追加し、stns経由での名前解決を有効にし�
 
 最後にSSHログインを可能にするため、sshdの設定を行います。
 
-* /etc/sshd/sshd_config
+* /etc/ssh/sshd_config
 
 ```
 PubkeyAuthentication yes

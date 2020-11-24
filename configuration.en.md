@@ -13,6 +13,7 @@ port = 1104
 include = "/etc/stns/conf.d/*"
 module_path = "/usr/local/stns/modules.d"
 load_module = "mod_stns_etcd.so"
+allow_ips = ["10.0.0.1/24"]
 # basic auth
 [basic_auth]
 user = "basic_user"
@@ -52,6 +53,7 @@ endpoints = ["http://127.0.0.1:2379"]
 |include|include config directory| -|
 |module_path|module include path| /usr/local/stns/modules.d|
 |load_module|include module name| -|
+|allow_ips|allow ip(subnet) list| -|
 |basic_auth - user| basic authentication user(env:STNS_BASIC_AUTH_USER)| -|
 |basic_auth - password| basic authentication password(env:STNS_BASIC_AUTH_PASSWORD)|-|
 |token_auth - tokens| token authentication tokens(env:STNS_AUTH_TOKEN separator is `,`)|-|

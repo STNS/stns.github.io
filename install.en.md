@@ -102,7 +102,7 @@ Add stns into `nsswitch.conf` to enable name resolution using STNS. To use LDAP 
 
 **Lastly**, configure sshd to enable SSH login using STNS.
 
-`/etc/sshd/sshd_config`:
+`/etc/ssh/sshd_config`:
 
 ```
 PubkeyAuthentication yes
